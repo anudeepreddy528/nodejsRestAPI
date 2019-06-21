@@ -6,7 +6,7 @@ const customerModel = require('./customer-datastore');
 
 var router = express.Router();
 var pageSize = 10;
-var startIndex = 0;
+var nextPageToken = 0;
 
 // Automatically parse request body as JSON
 router.use(bodyParser.json());
@@ -19,16 +19,15 @@ router.use(bodyParser.json());
 router.get('/', (req, res, next) => {
 
   pageSize = req.query.pageSize || 10;
-  startIndex = req.query.startIndex || 0;
-  console.log("Searching Customers." + "PageSize = "+pageSize+". StartIndex="+startIndex);
-  customerModel.getAllCustomers(parseInt(pageSize), parseInt(req.query.startIndex), (err, customers, nextPageAvailable) => {
+  console.log("Searching Customers." + "PageSize = "+pageSize+". StartIndex="+nextPageToken);
+  customerModel.getAllCustomers(pageSize, req.query.nextPageToken, (err, customers, hasMore) => {
     if (err) {
       next(err);
       return;
     }
     res.json({
       items: customers,
-      nextPage: nextPageAvailable
+      hasMore: hasMore
     });
   });
 });

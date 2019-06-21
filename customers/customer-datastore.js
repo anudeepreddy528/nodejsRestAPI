@@ -17,9 +17,9 @@
   /*
     Method to query the List of Customer(s)
   */
-  function getAllCustomers(pageSize,startIndex,callback) {
+  function getAllCustomers(pageSize,pageToken,callback) {
     console.log('In get all Customer');
-    var query = datastore.createQuery([kind]).limit(pageSize).order(key).start(startIndex);
+    var query = datastore.createQuery([kind]).limit(pageSize).order(key).start(pageToken);
     datastore.runQuery(query, (err, customers, info) => { 
       if (err) {
         callback(err);
