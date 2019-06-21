@@ -94,7 +94,7 @@
     
     //get key from the searched record
     //TODO: empty and duplicate check
-    var key=entity[0][DataStore.KEY];
+    var key=customers[0][DataStore.KEY];
     var keykind=datastore.key([kind,parseInt(key.id)]);
     
     //update the data fields
