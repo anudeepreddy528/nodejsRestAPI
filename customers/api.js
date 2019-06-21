@@ -4,8 +4,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const customerModel = require('./customer-datastore');
 
-const router = express.Router();
-const pageSize = 10;
+var router = express.Router();
+var pageSize = 10;
 
 // Automatically parse request body as JSON
 router.use(bodyParser.json());
