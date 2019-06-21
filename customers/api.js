@@ -16,6 +16,10 @@ router.use(bodyParser.json());
  * Retrieve All customers customers.
  */
 router.get('/', (req, res, next) => {
+
+  pageSize = req.query.pageSize || 10;
+  startIndex = req.query.startIndex || 0;
+  console.log("Searching Customers." + "PageSize = "+pageSize+". StartIndex="+startIndex);
   customerModel.getAllCustomers(parseInt(pageSize), parseInt(req.query.startIndex), (err, customers, nextPageAvailable) => {
     if (err) {
       next(err);
