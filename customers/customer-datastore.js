@@ -83,6 +83,44 @@
     Function to update Customer Record found with CustId , it will end up deleteting all matching records
   */
  function updateCustomer(custId, firstName, lastName, telephoneNo, callback) {
+  
+  //retrieve customer record
+  var query = datastore.createQuery(kind).filter(key, '=', parseInt(custId));
+  datastore.runQuery(query, (err, customers) => {
+    if (err ) {
+      callback(err);
+      return;
+    }
+    
+    //get key from the searched record
+    //TODO: empty and duplicate check
+    var key=entity[0][DataStore.KEY];
+    var keykind=datastore.key([kind,parseInt(key.id)]);
+    
+    //update the data fields
+    //TODO: can be done in some generic way
+    customers[0].firstName = firstName;
+    customers[0].lastName = lastName;
+    customers[0].telephoneNo = telephoneNo;
+    
+    var updatedCust = {
+      key: keykind,
+      data: customers[0]
+    };    
+
+    datastore.save(updatedCust,(err,data) => {
+      if (err) {
+        callback(err);
+        return;
+      }
+    });
+  });
+ }
+
+ /*
+   Function to delete Customer Record found with CustId , it will end up deleteting all matching records
+ */
+function deleteCustomer(custId, callback) {
   //retrieve customer record
   var query = datastore.createQuery(kind).filter(key, '=', parseInt(custId));
   datastore.runQuery(query, (err, customers) => {
@@ -90,40 +128,18 @@
       callback(err);
       return;
     }
-    var updatedCust = {
-      key:  customers[0][DataStore.KEY],
-      data: customers[0]
-    };    
-
-  //console.log(updatedCust);
-  datastore.update(updatedCust, callback);
+    
+    //TODO: check for duplicate
+    //retrieve the Key to delete the Object
+    const custKey = customers[0][DataStore.KEY];
+    datastore.delete(custKey, callback);
   });
  }
 
-
-  /*
-    Function to delete Customer Record found with CustId , it will end up deleteting all matching records
-  */
-  function deleteCustomer(custId, callback) {
-    //retrieve customer record
-    var query = datastore.createQuery(kind).filter(key, '=', parseInt(custId));
-    datastore.runQuery(query, (err, customers) => {
-      if (err) {
-        callback(err);
-        return;
-      }
-      
-      //retrieve the Key to delete the Object
-      const custKey = customers[0][DataStore.KEY];
-      datastore.delete(custKey, callback);
-    });
-  }
-
-  
-    module.exports = {
-      getCustomer,
-      getAllCustomers,
-      createCustomer,
-      updateCustomer,
-      deleteCustomer
-    };
+ module.exports = {
+    getCustomer,
+    getAllCustomers,
+    createCustomer,
+    updateCustomer,
+    deleteCustomer
+ };
