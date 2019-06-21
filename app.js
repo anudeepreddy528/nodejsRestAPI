@@ -31,11 +31,13 @@ app.use((err, req, res) => {
 });
 
 if (module === require.main) {
+
   // Start the server
-  const server = app.listen(config.PORT, () => {
-    const port = server.address().port;
-    console.log(`App listening on port ${port}`);
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, (req,res) => {
+    console.log(`App started http://localhost:${PORT}`);
   });
+  
 }
 
 module.exports = app;
