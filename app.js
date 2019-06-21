@@ -13,7 +13,7 @@ app.use('/api/customers', require('./customers/api'));
 
 // Redirect root to /books
 app.get('/', (req, res) => {
-  res.redirect('/api/customer');
+  res.redirect('/api/customers');
 });
 
 // Basic 404 handler
