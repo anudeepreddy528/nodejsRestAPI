@@ -36,8 +36,9 @@ router.get('/', (req, res, next) => {
  *
  * Retrieve a customer.
  */
-router.get('/:custId', (req, res, next) => {
-  customerModel.getCustomer(parseInt(req.params.custId), (err , customer) => {
+// router.get('/:custId', (req, res, next) => {
+ router.get('/', (req, res, next) => {
+  customerModel.getCustomer(parseInt(req.query.custId), (err , customer) => {
     if (err) {
       next(err);
       return;
@@ -67,8 +68,9 @@ router.post('/', (req, res, next) => {
  *
  * Update a customer.
  */
-router.put('/:custId', (req, res, next) => {
-  customerModel.updateCustomer(req.body.custId,req.body.firstName, req.body.lastName, req.body.telephoneNo, (err, customer) => {
+// router.put('/:custId', (req, res, next) => {
+ router.put('/', (req, res, next) => {
+  customerModel.updateCustomer(req.query.custId,req.body.firstName, req.body.lastName, req.body.telephoneNo, (err, customer) => {
     if (err) {
       next(err);
       return;
@@ -82,8 +84,9 @@ router.put('/:custId', (req, res, next) => {
  *
  * Delete a customer.
  */
-router.delete('/:custId', (req, res, next) => {
-  customerModel.deleteCustomer(req.params.custId, err => {
+//router.delete('/:custId', (req, res, next) => {
+router.delete('/', (req, res, next) => {
+  customerModel.deleteCustomer(req.query.custId, err => {
     if (err) {
       next(err);
       return;
