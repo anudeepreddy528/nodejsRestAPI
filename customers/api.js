@@ -70,6 +70,7 @@ router.post('/', (req, res, next) => {
  */
 // router.put('/:custId', (req, res, next) => {
  router.put('/', (req, res, next) => {
+   console.log("Inside Update Customer {"+req.query.custId+","+req.body.firstName+","+req.body.lastName+","+req.body.telephoneNo);
   customerModel.updateCustomer(req.query.custId,req.body.firstName, req.body.lastName, req.body.telephoneNo, (err, customer) => {
     if (err) {
       next(err);

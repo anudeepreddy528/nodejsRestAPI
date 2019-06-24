@@ -87,7 +87,8 @@
   //retrieve customer record
   var query = datastore.createQuery(kind).filter(key, '=', parseInt(custId));
   datastore.runQuery(query, (err, customers) => {
-    if (err ) {
+    if (err) {
+      console.log("query to fetch the customer gave error");
       callback(err);
       return;
     }
@@ -96,7 +97,9 @@
     //TODO: empty and duplicate check
     var key=customers[0][DataStore.KEY];
     var keykind=datastore.key([kind,parseInt(key.id)]);
-    
+    console.log("key ="+key);
+    console.log("var keykind"+keykind);
+
     //update the data fields
     //TODO: can be done in some generic way
     customers[0].firstName = firstName;
@@ -108,8 +111,11 @@
       data: customers[0]
     };    
 
+    console.log("updated Cust"+ updatedCust);
+
     datastore.save(updatedCust,(err,data) => {
       if (err) {
+        console.log("update call failed "+err);
         callback(err);
         return;
       }
