@@ -119,7 +119,9 @@
         callback(err);
         return;
       }
+      callback(null,data);
     });
+    
   });
  }
 
