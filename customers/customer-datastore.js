@@ -97,8 +97,8 @@
     //TODO: empty and duplicate check
     var key=customers[0][DataStore.KEY];
     var keykind=datastore.key([kind,parseInt(key.id)]);
-    console.log("key ="+key);
-    console.log("var keykind"+keykind);
+    console.log("key ="+JSON.stringify(key));
+    console.log("var keykind"+JSON.stringify(keykind));
 
     //update the data fields
     //TODO: can be done in some generic way
@@ -111,7 +111,7 @@
       data: customers[0]
     };    
 
-    console.log("updated Cust"+ updatedCust);
+    console.log("updated Cust"+ JSON.stringify(updatedCust));
 
     datastore.save(updatedCust,(err,data) => {
       if (err) {
