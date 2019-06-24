@@ -4,6 +4,7 @@
 
   const kind = "Customer";
   const key = "custId";
+  const abc = "for checking";
 
   // /*
   // only required to run this code locally
