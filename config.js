@@ -1,5 +1,5 @@
 
 module.exports = {
-  projectId: 'gcpmicroserviceproject',
-  keyFilename: './key.json',
+  projectId: 'sams-528',
+  keyFilename: './key.json'
 };
